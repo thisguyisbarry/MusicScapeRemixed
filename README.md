@@ -1,0 +1,1 @@
+This is a rewrite of [MusicScape](https://github.com/StefanAleksik/musicScape)
