@@ -1,23 +1,23 @@
 version: '3'
 services:
   web:
-    build: ./nginx
+    build: 
+      context: ./nginx
+      dockerfile: dockerfile
     ports:
       - "80:80"
     depends_on:
       - api
-    volumes:
-      - frontend/build:/app/frontend/build
   api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "8080:8080"
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3000:3000"
     depends_on:
