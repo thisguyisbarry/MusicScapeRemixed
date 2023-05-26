@@ -1,4 +1,3 @@
-// app/routes/auth/spotify.callback.tsx
 import type { LoaderArgs } from '@remix-run/node';
 
 import { authenticator } from '~/services/auth.server';

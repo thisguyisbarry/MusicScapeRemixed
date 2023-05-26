@@ -1,13 +1,12 @@
-// app/services/session.server.ts
 import { createCookieSessionStorage } from '@remix-run/node';
 
 export const sessionStorage = createCookieSessionStorage({
     cookie: {
-        name: '_session', // use any name you want here
+        name: '_session', 
         sameSite: 'lax',
         path: '/',
         httpOnly: true,
-        secrets: ['s3cr3t'], // replace this with an actual secret from env variable
+        secrets: process.env.COOKIE_SECRETS, 
         secure: process.env.NODE_ENV === 'production', // enable this in prod only
     },
 });
