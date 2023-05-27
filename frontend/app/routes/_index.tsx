@@ -3,6 +3,7 @@ import type { V2_MetaFunction } from "@remix-run/node";
 import type { LoaderArgs } from '@remix-run/node';
 import { Form, useLoaderData } from '@remix-run/react';
 import { spotifyStrategy } from '~/services/auth.server';
+import RecentlyPlayedSongs from "~/components/RecentlyPlayedSongs";
 
 
 export const meta: V2_MetaFunction = () => {
@@ -13,10 +14,10 @@ export async function loader({ request }: LoaderArgs) {
   return spotifyStrategy.getSession(request);
 }
 
-
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   const user = data?.user;
+  const accessToken = data?.accessToken;
 
   return (
       <div style={{ textAlign: 'center', padding: 20 }}>
@@ -25,7 +26,10 @@ export default function Index() {
               This is a work in progress
           </p>
           {user ? (
+            <div>
               <p>You are logged in as: {user?.name}</p>
+              <RecentlyPlayedSongs token={accessToken!}/>
+            </div>
           ) : (
               <p>You are not logged in yet!</p>
           )}
