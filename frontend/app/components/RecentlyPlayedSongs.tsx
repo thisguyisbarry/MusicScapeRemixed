@@ -30,7 +30,6 @@ function RecentlyPlayedSongs({ token }: RecentlyPlayedSongsProps){
           // use await to get the value of the promise
           const data: songData = await getRecentlyPlayedSongs(token);
           // set the state with the data
-        //   console.log(data)
           setSongData(data);
         } catch (error) {
           console.error(error);
@@ -39,6 +38,7 @@ function RecentlyPlayedSongs({ token }: RecentlyPlayedSongsProps){
 
     useEffect(() => {
         getSongData();
+        console.log('i fire once');
     }, []);
     
 

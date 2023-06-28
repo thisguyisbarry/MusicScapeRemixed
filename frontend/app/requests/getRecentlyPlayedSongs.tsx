@@ -47,8 +47,6 @@ export async function getRecentlyPlayedSongs(token: string){
         let songData: songData = await getSongData(songs, token);
 
         songData.timeDifference = timeDifference;
-
-        console.log(songData);
         return songData;
 
     } else {
@@ -75,16 +73,16 @@ async function getSongData(songs: Array<{ track: { id: string } }>, token: strin
         timeDifference: 0
     };
 
-    songs.forEach(async song  =>{
+    for (const song of songs) {
         let songID: string = song.track.id;
-
+      
         let res = await fetch(url + songID, {
-            headers:{
-                'Authorization' : 'Bearer ' + token
-            }
+          headers: {
+            Authorization: "Bearer " + token,
+          },
         });
-
-        const data = await res.json();
+      
+        const data = await res.json()
 
         if(res.ok){
             songDataObect.danceability      += data.danceability;
@@ -104,8 +102,8 @@ async function getSongData(songs: Array<{ track: { id: string } }>, token: strin
         } else{
             throw new Error("Failed to fetch song meta data. Song:" + songID);
         }
-    })
-    console.log("Key " + songDataObect.key);
+    }
+
     songDataObect.danceability      = songDataObect.danceability / songs.length;
     songDataObect.key               = [mostCommonNumber(songDataObect.key)];
     songDataObect.loudness          = songDataObect.loudness / songs.length;
@@ -118,7 +116,6 @@ async function getSongData(songs: Array<{ track: { id: string } }>, token: strin
     songDataObect.instrumentalness  = songDataObect.instrumentalness / songs.length;
     songDataObect.liveness          = songDataObect.liveness / songs.length;
     songDataObect.timeDifference    = songDataObect.timeDifference / songs.length;
-    console.log(songDataObect);
     return songDataObect;
 }
 
