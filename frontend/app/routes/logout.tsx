@@ -1,9 +1,9 @@
-import type { ActionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs } from '@remix-run/node';
 import { json, redirect } from '@remix-run/node';
 
 import { destroySession, getSession } from '~/services/session.server';
 
-export async function action({ request }: ActionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
     return redirect('/', {
         headers: {
             'Set-Cookie': await destroySession(
