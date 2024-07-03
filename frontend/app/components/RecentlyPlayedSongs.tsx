@@ -38,7 +38,6 @@ function RecentlyPlayedSongs({ token }: RecentlyPlayedSongsProps){
 
     useEffect(() => {
         getSongData();
-        console.log('i fire once');
     }, []);
     
 
