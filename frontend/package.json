@@ -8,11 +8,15 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@p5-wrapper/react": "^4.4.2",
     "@remix-run/css-bundle": "2.10.0",
     "@remix-run/node": "2.10.0",
     "@remix-run/react": "2.10.0",
     "@remix-run/serve": "2.10.0",
+    "@types/randomcolor": "^0.5.9",
     "isbot": "^3.6.8",
+    "p5": "^1.9.4",
+    "randomcolor": "^0.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-auth": "^3.4.0",
