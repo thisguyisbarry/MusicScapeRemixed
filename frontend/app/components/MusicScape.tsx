@@ -1,4 +1,5 @@
-
+import randomColor from "randomcolor";
+import lodash from 'lodash';
 
 interface songData{
     danceability: number,
@@ -15,7 +16,68 @@ interface songData{
     timeDifference: number
 }
 
-function MusicScape(username : string,songData : songData) {
+interface MusicScapeProps{
+    username: string,
+    songData: songData
+}
+
+function MusicScape({username, songData}: MusicScapeProps) {
+
+    let musicHues: string[] = ['monochrome', 'blue', 'green', 'purple', 'pink', 'red', 'orange', 'yellow'];
+    let musicKHues: string[] = ['yellow', 'yellow', 'orange', 'red', 'red', 'pink', 'pink', 'purple', 'blue', 'blue', 'green', 'green'];
+    let musicLums: string[] = ['light', 'bright', 'bright', 'bright', 'light', 'bright', 'light', 'bright', 'bright', 'light', 'bright', 'light'];
+    let keyNames: string[] = ["C", "C♯/D♭", "D", "D♯/E♭", "E", "F", "F♯/G♭", "G", "G♯/A♭", "A", "A♯/B♭", "B"];
+
+    let backgoundColour1: string;
+    let backgroundColour2: string;
+
+    let sunColours: string[] = [];
+    let sunSize: number;
+    let sunRange: number;
+    let sunPosition;
+
+    let landColours;
+
+
+    let valenceColour: string = musicHues[Math.round(map(songData.valence, 0.0, 1.0, 0, 7))]
+    
+
+    // Mode Major = day, Minor = Night
+    if(songData.mode == 1){
+      backgoundColour1 = randomColor({
+        hue: valenceColour,
+        luminosity: 'light'
+      })
+      backgroundColour2 = randomColor({
+        luminosity: 'light'
+      })
+
+      sunColours = randomColor({
+        hue: 'yellow',
+        count: 2
+      })
+      sunSize = lodash.random(200,300);
+      sunRange = lodash.random(20,50)
+
+    } else{
+      backgoundColour1 = randomColor({
+        hue: valenceColour,
+        luminosity: 'dark'
+      })
+      backgroundColour2 = randomColor({
+        luminosity: 'dark'
+      })
+
+      sunColours = randomColor({
+        luminosity: 'light',
+        hue: 'monochrome',
+        count: 2
+      })
+      sunSize = lodash.random(75,150);
+      sunRange = lodash.random(5,10)
+
+    }
+
     return (
       <div>
         <div id="canvasDiv"></div>
@@ -26,7 +88,7 @@ function MusicScape(username : string,songData : songData) {
             <p>
               The <b>backgound</b> of your musicScape is{" "}
               <a id="valenceColor">{valenceColor}</a> because you've recently
-              listened to music that relates to <b id="valenceString">{props.valenceString}</b>{" "}
+              listened to music that relates to <b id="valenceString">{songData.valenceString}</b>{" "}
               emotions.
             </p>
             <p>
@@ -57,3 +119,9 @@ function MusicScape(username : string,songData : songData) {
   
   // Export the component
   export default MusicScape;
+
+// Changes one value range to map to another range (i.e 0.0 - 1.0 becomes 1-100)
+// Like the map function in jQuery (at least for this use case!)
+function map(value: number, inMin: number, inMax: number, outMin: number, outMax: number) {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}

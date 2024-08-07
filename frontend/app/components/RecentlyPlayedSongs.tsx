@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { getRecentlyPlayedSongs } from "~/requests/getRecentlyPlayedSongs";
+import MusicScape from './MusicScape';
 
 interface RecentlyPlayedSongsProps {
     token: string;
@@ -45,15 +46,9 @@ function RecentlyPlayedSongs({ token }: RecentlyPlayedSongsProps){
     return (
         <div>
           {songData ? (
-            <div>
-                <ul>
-                {Object.entries(songData).map(([key, value]) => (
-                    <li key={key}>
-                    {key}: {value}
-                    </li>
-                ))}
-                </ul>
-            </div>
+            <MusicScape 
+              username=""
+              songData = {songData} />
           ) : (
             <div>Loading...</div>
           )}
