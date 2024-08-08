@@ -38,7 +38,7 @@ function MusicScape({username, songData}: MusicScapeProps) {
 
     let landColours = randomColor({
       hue: musicHues[songData.key[0]],
-      luminosity: musicLums[songData.key[0]] as "bright" | "light",  // Guaranteeing the type to TypeScipt
+      luminosity: musicLums[songData.key[0]] as "bright" | "light",  // Guaranteeing the type to TypeScript
       count: 5,
       format: 'rgba',
       alpha: 0.5
@@ -58,11 +58,10 @@ function MusicScape({username, songData}: MusicScapeProps) {
 
 
 
-
     let valenceColour: string = musicHues[Math.round(map(songData.valence, 0.0, 1.0, 0, 7))]
     
 
-    // Mode Major = day, Minor = Night
+    // Mode Major = day (1), Minor = Night (0)
     if(songData.mode == 1){
       backgoundColour1 = randomColor({
         hue: valenceColour,
@@ -98,7 +97,7 @@ function MusicScape({username, songData}: MusicScapeProps) {
 
     }
 
-    return (
+    return (null
       // <div>
       //   <div id="canvasDiv"></div>
       //   <div className="t1">
