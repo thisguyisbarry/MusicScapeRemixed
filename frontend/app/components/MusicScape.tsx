@@ -21,6 +21,12 @@ interface MusicScapeProps{
     songData: songData
 }
 
+// Changes one value range to map to another range (i.e 0.0 - 1.0 becomes 1-100)
+// Like the map function in jQuery (at least for this use case!)
+function map(value: number, inMin: number, inMax: number, outMin: number, outMax: number) {
+  return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
 function MusicScape({username, songData}: MusicScapeProps) {
 
     let musicHues: string[] = ['monochrome', 'blue', 'green', 'purple', 'pink', 'red', 'orange', 'yellow'];
@@ -138,9 +144,3 @@ function MusicScape({username, songData}: MusicScapeProps) {
   
   // Export the component
   export default MusicScape;
-
-// Changes one value range to map to another range (i.e 0.0 - 1.0 becomes 1-100)
-// Like the map function in jQuery (at least for this use case!)
-function map(value: number, inMin: number, inMax: number, outMin: number, outMax: number) {
-    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-}
